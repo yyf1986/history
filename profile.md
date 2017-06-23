@@ -10,7 +10,7 @@ rq=$(who ami i|awk "{print \$3\" \"\$4}")
 ip=$(who ami i|awk "{print \$5}"|sed -e "s/(/ /" -e "s/)/ /")
 pwd=`pwd`
 serverip="serverip"#实际服务器地址
-curl -X POST "http://10.11.20.127:8089/v1/cmd/" -H  "accept: application/json" -H  "content-type: application/json" -d "{  \"Cmd\": \"$cmd\",  \"Ip\": \"$ip\",  \"Pwd\": \"$pwd\",  \"Rq\": \"$rq\",  \"Tty\": \"$tty\",  \"Username\": \"$user\",  \"ServerIp\": \"$serverip\"}"
+curl -X POST "http://启动cmdlog的服务器地址:8089/v1/cmd/" -H  "accept: application/json" -H  "content-type: application/json" -d "{  \"Cmd\": \"$cmd\",  \"Ip\": \"$ip\",  \"Pwd\": \"$pwd\",  \"Rq\": \"$rq\",  \"Tty\": \"$tty\",  \"Username\": \"$user\",  \"ServerIp\": \"$serverip\"}"
 '
 ```
 source /etc/profile
