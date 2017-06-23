@@ -1,4 +1,4 @@
-#### 首先按照profile.md配置好需要收集的服务器的配置
+#### 首先按照profile.md在需要收集的服务器上进行配置
 #### 下载cmdlog至本地
 #### 启动
 `nohup ./cmdlog > /dev/null 2>&1 &`
