@@ -1,18 +1,6 @@
-vim /etc/profile
-
- ```
-export PROMPT_COMMAND='\
-cmd=$(history 1 | { read x y; echo $y; })
-user=$(who ami i|awk "{print \$1}")
-tty=$(who ami i|awk "{print \$2}")
-rq=$(who ami i|awk "{print \$3\" \"\$4}")
-ip=$(who ami i|awk "{print \$5}"|sed -e "s/(/ /" -e "s/)/ /")
-pwd=`pwd`
-serverip=$(ss|awk "{print \$4}"|awk -F ":" "{print \$1}"|grep -Ev "127.0.0.1|Local"|uniq)
-curl -X POST "http://10.11.20.127:8089/v1/cmd/" -H  "accept: application/json" -H  "content-type: application/json" -d "{  \"Cmd\": \"$cmd\",  \"Ip\": \"$ip\",  \"Pwd\": \"$pwd\",  \"Rq\": \"$rq\",  \"Tty\": \"$tty\",  \"Username\": \"$user\",  \"ServerIp\": \"$serverip\"}"
-'
-```
-
-source /etc/profile
-
-启动web收集服务
+#### 首先按照profile.md配置好需要收集的服务器的配置
+#### 下载cmdlog至本地
+#### 启动
+`nohup ./cmdlog > /dev/null 2>&1 &`
+#### 说明
+> 会产生一个8089的服务，在当前路径下会产生一个日志文件
