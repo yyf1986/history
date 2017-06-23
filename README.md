@@ -1,12 +1,14 @@
 vim /etc/profile
 
  ```
-export HISTTIMEFORMAT="%Y-%m-%d_%H:%M:%S "
-#export PROMPT_COMMAND='{ msg=$(history 1 | { read x y; echo $y; });echo $(date +"%Y-%m-%d %H:%M:%S") [$(whoami)@$SSH_USER `pwd` ]" $msg" >> /var/log/history_log; }'
 export PROMPT_COMMAND='\
-msg=$(history 1 | { read x y; echo $y; })
-user=[`who am i`:`pwd`]
-curl -X POST -d "$user $msg" http://10.21.38.77:8000/log  #具体IP和端口参考实际情况
+cmd=$(history 1 | { read x y; echo $y; })
+user=$(who ami i|awk "{print \$1}")
+tty=$(who ami i|awk "{print \$2}")
+rq=$(who ami i|awk "{print \$3\" \"\$4}")
+ip=$(who ami i|awk "{print \$5}"|sed -e "s/(/ /" -e "s/)/ /")
+pwd=`pwd`
+curl -X POST "http://10.11.20.127:8089/v1/cmd/" -H  "accept: application/json" -H  "content-type: application/json" -d "{  \"Cmd\": \"$cmd\",  \"Ip\": \"$ip\",  \"Pwd\": \"$pwd\",  \"Rq\": \"$rq\",  \"Tty\": \"$tty\",  \"Username\": \"$user\"}"
 '
 ```
 
